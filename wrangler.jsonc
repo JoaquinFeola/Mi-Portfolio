@@ -1,9 +1,9 @@
 {
     "$schema": "node_modules/wrangler/config-schema.json",
-    "name": "mi-portafolio",
+    "name": "joaquin-feola",
     "routes": [
         {
-            "pattern": "://joaquin-feola.altamaquina.com*",
+            "pattern": "joaquin-feola.altamaquina.com",
             "custom_domain": true
         }
     ],
