@@ -12,6 +12,11 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
       
+      - name: Setup
+        uses: actions/setup-node@v4
+        with: 
+          node-version: '24'
+          
       - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v3
         with: 
