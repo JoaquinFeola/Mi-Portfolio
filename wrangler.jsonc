@@ -1,6 +1,12 @@
 {
     "$schema": "node_modules/wrangler/config-schema.json",
     "name": "joaquin-feola",
+    "compatibility_date": "2026-08-25",
+    "assets": {
+        "directory": "./dist",
+        "binding": "ASSETS",
+        "run_worker_first": false
+    },
     "routes": [
         {
             "pattern": "joaquin-feola.altamaquina.com",
