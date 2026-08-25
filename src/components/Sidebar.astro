@@ -1,0 +1,41 @@
+---
+const items = [
+    ["01", "Perfil", "#perfil"],
+    ["02", "Experiencia", "#experiencia"],
+    ["03", "Proyectos", "#proyectos"],
+    ["04", "Formación", "#formacion"],
+    ["05", "Competencias", "#competencias"],
+];
+---
+
+<aside class="sidebar">
+    <a class="wordmark" href="#inicio" aria-label="Ir al inicio"
+        >Joaquín<br />Feola</a
+    >
+    <p class="sidebar-role">
+        Desarrollador Full Stack<br />Software & Producto · IA asistida
+    </p>
+    <nav aria-label="Secciones del portfolio">
+        <p class="eyebrow sidebar-label">Índice operativo</p>
+        <ol class="sidebar-nav">
+            {
+                items.map(([number, name, href]) => (
+                    <li>
+                        <a href={href}>
+                            <span>{number}</span>
+                            {name}
+                        </a>
+                    </li>
+                ))
+            }
+        </ol>
+    </nav>
+    <div class="sidebar-bottom">
+        <div class="status-row">
+            <span>Estado académico</span><strong>En curso</strong>
+        </div>
+        <a class="sidebar-contact" href="#contacto"
+            >Iniciar contacto <span>↗</span></a
+        >
+    </div>
+</aside>

@@ -1,0 +1,24 @@
+---
+import type { Project } from "../data/portfolio";
+
+interface Props {
+  project: Project;
+  featured?: boolean;
+}
+
+const { project, featured = false } = Astro.props;
+---
+
+<article class:list={["project-card", { "project-card-featured": featured }]} data-project data-year={project.year} data-technologies={project.stack.join(",").toLowerCase()}>
+  <div class:list={["project-visual", `project-visual-${project.accent ?? "red"}`]}>
+    <span>{project.category}</span><i></i><b>{project.number}</b>
+  </div>
+  <div class="project-copy">
+    <p class="project-number">Caso / {project.number} · {project.year}</p>
+    <h3>{project.title}</h3>
+    <p>{project.description}</p>
+    <ul class="project-highlights">{project.highlights.map((highlight) => <li>{highlight}</li>)}</ul>
+    <ul class="project-stack">{project.stack.map((technology) => <li>{technology}</li>)}</ul>
+    {project.repositoryUrl && <a class="repository-link" href={project.repositoryUrl} target="_blank" rel="noreferrer">Ver repositorio <span>↗</span></a>}
+  </div>
+</article>

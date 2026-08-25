@@ -1,17 +1,311 @@
 ---
-
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Sidebar from "../components/Sidebar.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { projects, jobExcperiences } from "../data/portfolio";
+import Dayjs  from "dayjs";
+const skills = [
+    "React",
+    "TypeScript",
+    ".NET",
+    "Google Pub/Sub",
+    "Tailwind CSS",
+    "AWS",
+    "Git",
+    "IA asistida",
+];
+const years = [...new Set(projects.map((project) => project.year))].sort(
+    (a, b) => b - a,
+);
+const technologies = [
+    ...new Set(projects.flatMap((project) => project.stack)),
+].sort();
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+    title="Joaquín Feola — Portfolio"
+    description="Portfolio de Joaquín Feola, desarrollador y tech lead en Buenos Aires."
+>
+    <Sidebar />
+    <main id="inicio" class="page-content">
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="section-kicker">
+                <span>JF—01</span><span>Portfolio / 2026</span>
+            </div>
+            <p class="eyebrow">Perfil profesional</p>
+            <h1 id="hero-title">
+                Construyo software<br /><em>con intención.</em>
+            </h1>
+            <div class="hero-footer">
+                <p>
+                    Desarrollador Full Stack y Tech Lead. Diseño soluciones
+                    escalables, mantenibles y orientadas al impacto de producto.
+                </p><a
+                    class="circle-link"
+                    href="#perfil"
+                    aria-label="Conocer mi perfil">↓</a
+                >
+            </div>
+        </section>
+        <section
+            id="perfil"
+            class="section profile-section"
+            aria-labelledby="perfil-title"
+        >
+            <div class="section-index">01</div><div class="section-content">
+                <p class="eyebrow">Abstracto</p><h2 id="perfil-title">
+                    Una mirada técnica,<br />con foco humano.
+                </h2>
+                <div class="two-columns">
+                    <p>
+                        Me interesa el trabajo donde la tecnología se encuentra
+                        con una necesidad concreta: entender el contexto, tomar
+                        buenas decisiones y llevar una idea a una solución
+                        mantenible.
+                    </p><p>
+                        Combino desarrollo full stack, coordinación técnica y
+                        aprendizaje continuo. Busco que cada decisión de
+                        arquitectura aporte claridad, resiliencia y valor de
+                        negocio.
+                    </p>
+                </div>
+                <p class="ai-note">
+                    <span>Práctica actual</span> Uso herramientas de IA para acelerar
+                    investigación, documentación, pruebas y prototipos; el diseño
+                    técnico y la validación final siguen siendo parte de mi responsabilidad.
+                </p>
+            </div>
+        </section>
+        <section
+            id="experiencia"
+            class="section"
+            aria-labelledby="experiencia-title"
+        >
+            <div class="section-index">02</div><div class="section-content">
+                <p class="eyebrow">Experiencia seleccionada</p><h2
+                    id="experiencia-title"
+                >
+                    Trabajo de campo.
+                </h2>
+                <div class="experience-list">
+                    {
+                        jobExcperiences
+                        .sort((a,b) => a.order - b.order)
+                        .map((experience) => (
+                            <article class="experience-item">
+                                <>
+                                    <div class="experience-meta ">
+                                        <div class="flex-col flex">
+                                            <span>Desde: {Dayjs(experience.from).format("MMM, YYYY")}</span>
+                                            <span>Hasta: {Dayjs(experience.to).format("MMM, YYYY")}</span>
+                                        </div>
+                                        <span>En: {experience.company}</span>
+                                    </div>
+                                    <div>
+                                        <>
+                                            <h3>{experience.role}</h3>
+                                            <p set:html={experience.description} />
+                                        </>
+                                    </div>
+                                </>
+                            </article>
+                        ))
+                    }
+                    <!-- <article class="experience-item">
+                            <div class="experience-meta">
+                                <span>Actualidad</span><span>Igrowker ISA</span>
+                            </div><div>
+                                <h3>Tech Lead</h3><p>
+                                    Liderazgo y acompañamiento técnico de equipos:
+                                    definición de soluciones, construcción de
+                                    sistemas robustos y comunicación clara durante
+                                    el ciclo de desarrollo.
+                                </p>
+                            </div>
+                        </article> -->
+                    <!--  <article class="experience-item">
+                        <div class="experience-meta">
+                            <span>Experiencia</span><span>Igrowker Labs</span>
+                        </div><div>
+                            <h3>Desarrollador Full Stack</h3><p>
+                                Diseño e implementación de soluciones con
+                                frontend y backend, arquitectura distribuida,
+                                integraciones de pago y productos SaaS
+                                orientados a crecimiento.
+                            </p>
+                        </div>
+                    </article> -->
+                </div>
+            </div>
+        </section>
+        <section
+            id="proyectos"
+            class="section project-section"
+            aria-labelledby="proyectos-title"
+        >
+            <div class="section-index">03</div><div class="section-content">
+                <p class="eyebrow">Casos y aportes</p><h2 id="proyectos-title">
+                    Software con<br />fundamento.
+                </h2>
+                <div class="project-filters" aria-label="Filtrar proyectos">
+                    <label
+                        >Año <select id="year-filter"
+                            ><option value="">Todos</option>{
+                                years.map((year) => (
+                                    <option value={year}>{year}</option>
+                                ))
+                            }</select
+                        ></label
+                    >
+                    <label
+                        >Tecnología <select id="technology-filter"
+                            ><option value="">Todas</option>{
+                                technologies.map((technology) => (
+                                    <option value={technology}>
+                                        {technology}
+                                    </option>
+                                ))
+                            }</select
+                        ></label
+                    >
+                    <button id="reset-project-filters" type="button"
+                        >Limpiar filtros</button
+                    >
+                    <p id="project-filter-status" aria-live="polite">
+                        {projects.length} proyectos
+                    </p>
+                </div>
+                <div class="projects-list" id="projects-list">
+                    {
+                        projects.map((project, index) => (
+                            <ProjectCard
+                                project={project}
+                                featured={index === 0}
+                            />
+                        ))
+                    }
+                </div>
+            </div>
+        </section>
+        <section
+            id="formacion"
+            class="section education-section"
+            aria-labelledby="formacion-title"
+        >
+            <div class="section-index">04</div><div class="section-content">
+                <p class="eyebrow">Formación académica</p><h2
+                    id="formacion-title"
+                >
+                    Base para seguir<br />profundizando.
+                </h2>
+                <div class="education-list">
+                    <article>
+                        <p>Actualidad</p><div>
+                            <h3>Ingeniería en Informática</h3><span
+                                >Universidad Atlántida Argentina</span
+                            ><p>
+                                Formación orientada a fortalecer el pensamiento
+                                analítico y los fundamentos para diseñar
+                                sistemas eficientes.
+                            </p>
+                        </div>
+                    </article><article>
+                        <p>Título obtenido</p><div>
+                            <h3>Bachiller en Ciencias Sociales</h3><span
+                                >Educación secundaria completa</span
+                            >
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <section
+            id="competencias"
+            class="section skills-section"
+            aria-labelledby="competencias-title"
+        >
+            <div class="section-index">05</div><div class="section-content">
+                <p class="eyebrow">Herramientas y metodologías</p><h2
+                    id="competencias-title"
+                >
+                    Kit de trabajo.
+                </h2><div class="skills-grid">
+                    {
+                        skills.map((skill, index) => (
+                            <div>
+                                <>
+                                    <span>0{index + 1}</span>
+                                    <strong>{skill}</strong>
+                                </>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </section>
+        <footer id="contacto" class="contact-section">
+            <p class="eyebrow">¿Conversamos?</p><h2>
+                Una buena idea<br />merece <em>método.</em>
+            </h2><div class="contact-links">
+                <a class="contact-link" href="mailto:joacoarielfeola@gmail.com"
+                    >Escribirme por email <span>↗</span></a
+                ><a
+                    class="contact-link"
+                    href="https://www.linkedin.com/in/joaquin-feola/"
+                    target="_blank"
+                    rel="noreferrer">Conectar en LinkedIn <span>↗</span></a
+                ><a
+                    class="contact-link"
+                    href="https://github.com/JoaquinFeola"
+                    target="_blank"
+                    rel="noreferrer">Ver GitHub <span>↗</span></a
+                >
+            </div><div class="footer-line">
+                <span>Joaquín Feola</span><span>De la Costa, Argentina</span
+                ><span>© {new Date().getFullYear()}</span>
+            </div>
+        </footer>
+    </main>
+    <script>
+        const yearFilter =
+            document.querySelector<HTMLSelectElement>("#year-filter");
+        const technologyFilter =
+            document.querySelector<HTMLSelectElement>("#technology-filter");
+        const resetButton = document.querySelector<HTMLButtonElement>(
+            "#reset-project-filters",
+        );
+        const status = document.querySelector<HTMLElement>(
+            "#project-filter-status",
+        );
+        const projectCards = [
+            ...document.querySelectorAll<HTMLElement>("[data-project]"),
+        ];
+
+        const filterProjects = () => {
+            const year = yearFilter?.value ?? "";
+            const technology = technologyFilter?.value.toLowerCase() ?? "";
+            let visible = 0;
+
+            projectCards.forEach((card) => {
+                const matchesYear = !year || card.dataset.year === year;
+                const matchesTechnology =
+                    !technology ||
+                    card.dataset.technologies?.split(",").includes(technology);
+                const matches = matchesYear && matchesTechnology;
+                card.hidden = !matches;
+                if (matches) visible += 1;
+            });
+
+            if (status)
+                status.textContent = `${visible} ${visible === 1 ? "proyecto" : "proyectos"}`;
+        };
+
+        yearFilter?.addEventListener("change", filterProjects);
+        technologyFilter?.addEventListener("change", filterProjects);
+        resetButton?.addEventListener("click", () => {
+            if (yearFilter) yearFilter.value = "";
+            if (technologyFilter) technologyFilter.value = "";
+            filterProjects();
+        });
+    </script>
+</BaseLayout>
