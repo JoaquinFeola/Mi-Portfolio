@@ -1,0 +1,13 @@
+{
+    "$schema": "node_modules/wrangler/config-schema.json",
+    "name": "mi-portafolio",
+    "routes": [
+        {
+            "pattern": "://joaquin-feola.altamaquina.com*",
+            "custom_domain": true
+        }
+    ],
+    "vars": {
+        "ENTORNO": "produccion"
+    }
+}
