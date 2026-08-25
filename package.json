@@ -9,13 +9,16 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "generate-types": "wrangler types"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^14.2.4",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.2.6",
     "dayjs": "^1.11.23",
-    "tailwindcss": "^4.3.3"
+    "tailwindcss": "^4.3.3",
+    "wrangler": "^4.125.0"
   },
   "allowScripts": {
     "esbuild": true

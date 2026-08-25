@@ -1,4 +1,5 @@
 import billderLogo from "@public/images/projects/billder-logo.png";
+import reffindrLogo from "@public/images/projects/reffindr-logo.png";
 import type { ImageMetadata } from "astro";
 
 export interface Project {
@@ -10,8 +11,12 @@ export interface Project {
     highlights: string[];
     stack: string[];
     accent?: "red" | "blue" | "green";
-    repositories?: string[];
+    repositories?: {
+        label: string;
+        url: string;
+    }[];
     logo?: ImageMetadata;
+    logoAlt?: string;
 };
 
 // Para sumar un proyecto, agregá un objeto con esta misma estructura.
@@ -64,7 +69,13 @@ export const projects: Project[] = [
         highlights: ["Trabajo multidisciplinario", "Arquitectura integral", "Entrega iterativa"],
         stack: ["React", "Node.js", ".NET", "Python", "AWS"],
         accent: "green",
-        repositories: ["https://github.com/IgrowkerTraining/i004-reffindr-front"],
+        logo: reffindrLogo,
+        repositories: [
+            {
+                label: "Frontend",
+                url: "https://github.com/IgrowkerTraining/i004-reffindr-front",
+            },
+        ],
     },
     {
         number: "04",
@@ -76,7 +87,13 @@ export const projects: Project[] = [
         stack: ["React", "Node.js", ".NET", "Python", "AWS"],
         accent: "red",
         logo: billderLogo,
-        repositories: ["https://github.com/IgrowkerTraining/i004-reffindr-front"],
+        logoAlt: "Billder",
+        repositories: [
+            {
+                label: "Frontend",
+                url: "https://github.com/IgrowkerTraining/i003-billder-front",
+            },
+        ],
     },
 ];
 
