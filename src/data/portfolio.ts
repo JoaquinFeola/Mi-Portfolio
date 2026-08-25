@@ -1,5 +1,7 @@
 import billderLogo from "@public/images/projects/billder-logo.png";
 import reffindrLogo from "@public/images/projects/reffindr-logo.png";
+import xlabLogo from "@public/images/projects/xlab-logo.png";
+
 import type { ImageMetadata } from "astro";
 
 export interface Project {
@@ -27,6 +29,7 @@ export const projects: Project[] = [
         title: "Plataforma educativa",
         category: "EdTech · Arquitectura distribuida",
         description: "Plataforma educativa utilizada por cientos de estudiantes, evolucionada con una arquitectura orientada a eventos para desacoplar procesos, gestionar flujos asíncronos e integrar operaciones críticas como pagos.",
+        logo: xlabLogo,
         highlights: [
             "Arquitectura orientada a eventos",
             "Procesos de pago",
